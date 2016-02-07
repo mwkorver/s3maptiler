@@ -1,0 +1,8 @@
+{
+  "name" : "TmsFromWms",
+  "description" : "Creates TMS tiles from WMS, returns image and uploads to S3.",
+  "author" : "Mark Korver <mkorver@amazon.com>",
+  "contributors" : [],
+  "dependencies" : [],
+  "main" : "server.js"
+}
