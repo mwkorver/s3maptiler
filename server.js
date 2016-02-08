@@ -8,8 +8,8 @@ var http = require('http'),
 	fs = require('fs'),
 	path = require('path'),
     request = require('request').defaults({ encoding: null }),
-    url = require('url');    
-    //findRemoveSync = require('find-remove');
+    url = require('url'),  
+    findRemoveSync = require('find-remove');
 
     // get keys here, do not put this in ver control.
 	AWS.config.loadFromPath('./config.json'); 
@@ -66,7 +66,7 @@ http.createServer(function (req, res) {
 
 	console.log('localfilepath: ' + localfilepath);
 
-	// include Klokan TMS functions here:
+	// include Klokan TMS functions:
 	eval(fs.readFileSync('globalMercator.js')+'');
 
   	var mercator = MercatorUtils();
@@ -174,9 +174,9 @@ http.createServer(function (req, res) {
 		}
 	);
 
-	//console.log('immediatlely before findRemove');
-	//var result = findRemoveSync('./tmp', {test: true, age: {seconds: 60}, extensions: '.jpg'});
-	//console.log('findRemove result' + result);
+	console.log('immediatlely before findRemove');
+	var result = findRemoveSync('./tmp', {age: {seconds: 30}, extensions: '.jpg'});
+	console.log('findRemove result: ' + result);
 
 }).listen(8080);
  
