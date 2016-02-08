@@ -1,17 +1,14 @@
 {
   "name": "S3maptiler",
   "description": "Creates TMS tiles from WMS, returns image and uploads to S3.",
-  "author": "Mark Korver <mkorver@amazon.com>",
+  "author": "Mark Korver <mwkorver@gmail.com>",
   "contributors": {},
-   "dependencies": {
-    "http": "*",   	
-    "async": "*",
-    "aws-sdk": "*",
-    "fs": "*",
-    "path": "*",
-    "request": "*",
-    "url": "*",
-    "findRemoveSync": "*"
+   "dependencies": { 	
+    "async": "^1.5.0",
+    "aws-sdk": "^2.1.18",
+    "fs": "^0.0.2",
+	"request": "^2.59.0",
+    "find-remove": "^0.2.10
   },
   "main": "server.js",
   "scripts": {
