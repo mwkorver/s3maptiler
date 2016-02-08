@@ -178,7 +178,9 @@ http.createServer(function (req, res) {
 	var result = findRemoveSync('./tmp', {age: {seconds: 30}, extensions: '.jpg'});
 	console.log('findRemove result: ' + result);
 
-}).listen(8080);
- 
+}).listen(80);
+
+
+
 
 
