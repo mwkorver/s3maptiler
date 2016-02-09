@@ -1,0 +1,5 @@
+node_modules/
+.elasticbeanstalk/
+config.json
+*.jpg
+*.zip

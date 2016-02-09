@@ -12,7 +12,7 @@ var http = require('http'),
     findRemoveSync = require('find-remove');
 
     // get keys here, do not put this in ver control.
-	AWS.config.loadFromPath('./config.json'); 
+	//AWS.config.loadFromPath('./config.json'); 
 
 // this is the underlying ELB where WMS servers live
 var wmsServer = 'http://mapserv-1977199279.us-east-1.elb.amazonaws.com/wms/?map=/data/map/mapfiles/naip_rgb100pct_20140623.map&';
