@@ -33,9 +33,9 @@ http.createServer(function (req, res) {
     console.log('queryObject: ' + queryObject);
 
 	var test = false,
-	testtilename = "17/20996/85306.jpg"; //utm10 seattle
+	testtilename = "17/20996/85306.jpg"; // utm10 seattle
 	//testtilename = "14/4958/6060.jpg"; // boston
-	//testtilename = "14/3887/10128.jpg"; //kansas city
+	//testtilename = "14/3887/10128.jpg"; // kansas city
 
 	// checks to see if tile object and debug param test exists
 	// if no tile name uses built-in tile name and put in debug mode
@@ -46,7 +46,7 @@ http.createServer(function (req, res) {
 			test = true;				
 		}
 	} else {
-		console.log('Running in Test mode');
+		console.log('Test mode');
 		test = true;
 		tilename = '1.0.0/tms-mercator-naip/' + testtilename;
 		console.log('no url value, using builtin test tilename: ' + tilename);				
@@ -178,7 +178,8 @@ http.createServer(function (req, res) {
 	var result = findRemoveSync('./tmp', {age: {seconds: 30}, extensions: '.jpg'});
 	console.log('findRemove result: ' + result);
 
-}).listen(80);
+//}).listen(8080);
+}).listen(process.env.PORT || 8888);
 
 
 
