@@ -15,9 +15,9 @@ var http = require('http'),
 	//AWS.config.loadFromPath('./config.json'); 
 
 // this is the underlying ELB where WMS servers live
-var wmsServer = 'http://mapserv-1977199279.us-east-1.elb.amazonaws.com/wms/?map=/data/map/mapfiles/naip_rgb100pct_20140623.map&';
+var wmsServer = 'mapserver-docker-743146079.us-east-1.elb.amazonaws.com/cgi-bin/mapserv?map=/data/map/mapfiles/naip_docker.map&';
 // this bucket is setup as website, also some levels have 1 day lifecycle.
-var bucketname = "naip-tms";  
+var bucketname = "workshop-tms";  
 
  var mimeTypes = {
     "html": "text/html",
