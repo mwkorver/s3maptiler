@@ -26,14 +26,20 @@ server.js uses 4 environment variables to function. You can see them in example_
 WMS_SERVER points at your WMS, if you run your own WMS on AWS, it would typically point at an ELB that would front an auto-scaling group of WMS servers.
 See this Docker container for an UMN Mapserver example.
   https://github.com/mwkorver/mapserver
-  
-BUCKET_NAME is the S3 bucket you are using to serve tiles from. This is your tile cache.
-TILE_PREFIX is a prefix to your TMS tile.
-MAP_LAYERS is layer or layers that you use in your WMS request.
+
+
+| Name        | Purpose           | Example  |
+| ------------- |:-------------:| -----:|
+| WMS_SERVER  | WMS endpoint | http://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP_SCALE/ImageServer/WMSServer?request=Getmap&service=WMS& |
+| BUCKET_NAME | is the S3 bucket you are using to serve tiles from. This is your tile cache.      | workshop-tms |
+| TILE_PREFIX | is a prefix to your TMS tile      | 1.0.0/tms-mercator-naip/ |
+| MAP_LAYERS | is layer or layers that you use in your WMS request  | ddd |
+
 
 Remember that if you run this on EC2/Elastic Beanstalk use IAM Roles rather than IAM keys in config.js. 
 Your IAM Role (or IAM User if not on EC2) should map to a policy that looks like this.
 
+```javascript
   {
     "Version": "2012-10-17",
     "Statement": [
@@ -43,11 +49,11 @@ Your IAM Role (or IAM User if not on EC2) should map to a policy that looks like
           "s3:PutObject",
           "s3:PutObjectAcl"
         ],
-        "Resource": ["arn:aws:s3:::yourBucketName/*"]
+        "Resource": ["arn:aws:s3:::BUCKET_NAME/TILE_PREFIX*"]
       }
     ]
   }
-
+```
 
 ## Running
 
