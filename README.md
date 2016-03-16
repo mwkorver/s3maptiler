@@ -25,7 +25,8 @@ See this gist for an example of S3 redirect rule.
 server.js uses 4 environment variables to function. You can see them in example_env.js
 WMS_SERVER points at your WMS, if you run your own WMS on AWS, it would typically point at an ELB that would front an auto-scaling group of WMS servers.
 See this Docker container for an UMN Mapserver example.
-  https://github.com/mwkorver/mapserver
+
+  > https://github.com/mwkorver/mapserver
 
 
 | Name        | Purpose   | Example  |
