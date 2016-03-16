@@ -1,5 +1,5 @@
 #!/usr/local/bin/node
-console.log('Starting S3 Tiler');
+console.log('Starting s3MapTiler');
 
 // dependencies
 var AWS = require('aws-sdk'),
@@ -7,10 +7,9 @@ var AWS = require('aws-sdk'),
     fs = require('fs'),
     http = require('http'),
     os = require('os'),
-	domain = require('domain');
-	d = domain.create();
+    domain = require('domain');
 
-
+var d = domain.create();
 d.on('error', function(err) {
 	console.error('ERROR: '+ err);
 	res.writeHead(500, {'Content-Type': 'text/plain'});
@@ -50,15 +49,15 @@ eval(fs.readFileSync('globalMercator.js')+'');
 var mercator = MercatorUtils();
 
 //this function builds WMS request from a TMS tile name.
-function getTileUrl(level, row, col, imagetype) {
+function getTileUrl(level, row, col, imageType) {
 	var mercBounds = mercator.tileBounds(row, col, level);
-	wmsreq = process.env.WMS_SERVER + "&SERVICE=WMS&LAYERS=" + process.env.MAP_LAYERS
+	var wmsReq = process.env.WMS_SERVER + "&SERVICE=WMS&LAYERS=" + process.env.MAP_LAYERS
 	+ "&SRS=epsg:3857&BBOX=" 
 	+ mercBounds[1] + "," + mercBounds[0] + "," + mercBounds[3] + "," + mercBounds[2] 
 	+ "&VERSION=1.1.1&REQUEST=GetMap&FORMAT=" 
-	+ imagetype
+	+ imageType
 	+ "&WIDTH=256&HEIGHT=256";
-	return (wmsreq);
+	return (wmsReq);
 	}
 
 d.run(function() {
@@ -88,7 +87,7 @@ d.run(function() {
 		// checks to see if tile object and debug param test exists
 		// if no tile name uses built-in tile name and sets to debug mode
 		if (typeof queryObject.tile !== 'undefined'){
-			var tilename = queryObject.tile;
+			var tileName = queryObject.tile;
 			if (typeof queryObject.test !== 'undefined'){
 				console.log('check for test: ' + queryObject.test);
 				test = true;				
@@ -97,19 +96,19 @@ d.run(function() {
 		} else {
 			test = true;
 			console.log('No tile query object, putting in test mode');
-			tilename = process.env.TILE_PREFIX + "17/20996/85306.jpg"; // utm10 seattle
-			//tilename = process.env.TILE_PREFIX + "14/4958/6060.jpg"; // boston
-			//tilename = process.env.TILE_PREFIX + "14/3887/10128.jpg"; // kansas city
-			console.log('no url value, using builtin test tilename: ' + tilename);				
+			var tileName = process.env.TILE_PREFIX + "17/20996/85306.jpg"; // utm10 seattle
+			//tileName = process.env.TILE_PREFIX + "14/4958/6060.jpg"; // boston
+			//tileName = process.env.TILE_PREFIX + "14/3887/10128.jpg"; // kansas city
+			console.log('no url value, using builtin test tileName: ' + tileName);				
 		} 
 
 		try {
 		// parses the url
-			var level = tilename.split('/').slice(2)[0], 
-				col = tilename.split('/').slice(3)[0],
-				tmp = tilename.split('/').slice(4)[0],
+			var level = tileName.split('/').slice(2)[0], 
+				col = tileName.split('/').slice(3)[0],
+				tmp = tileName.split('/').slice(4)[0],
 				row = parseInt(tmp.split('.').slice(0)[0]),
-				ext = tilename.split('.').pop();
+				ext = tileName.split('.').pop();
 	  	} catch (e) {
 		    res.writeHead(500, {'Content-Type': 'text/plain'});
 		    res.write('Error parsing url\n');
@@ -119,9 +118,9 @@ d.run(function() {
 		}
 		
 		// Infer the image type.
-		var typeMatch = tilename.match(/\.([^.]*)$/);
+		var typeMatch = tileName.match(/\.([^.]*)$/);
 		if (!typeMatch) {
-			console.error('unable to infer image type for key ' + tilename);
+			console.error('unable to infer image type for key ' + tileName);
 			res.writeHead(400, {'Content-Type': 'text/plain'} );
 			res.write('unable to infer image type from object key\n');
 			res.end();
@@ -129,7 +128,7 @@ d.run(function() {
 		}
 		var imageType = typeMatch[1];
 		if (imageType != "jpg" && imageType != "png") {
-			console.error('skipping non-image ' + tilename);
+			console.error('skipping non-image ' + tileName);
 			res.writeHead(400, {'Content-Type': 'text/plain'} );
 			res.write('Error, non-image request\n');
 			res.end();
@@ -137,24 +136,24 @@ d.run(function() {
 		}
 
 		// create the WMS url
-		var wmsrequest = getTileUrl(level, row, col, mimeTypes[tilename.split(".").reverse()[0]]);
+		var wmsRequest = getTileUrl(level, row, col, mimeTypes[tileName.split(".").reverse()[0]]);
 	   	
 	   	// if in test mode, output debug info	
 		if (test) {
 	  		res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write('<html><body>');
-			res.write('Tilename:<br>' + tilename + '<br>');
+			res.write('tileName:<br>' + tileName + '<br>');
 			res.write('S3 Bucket:<br>' + process.env.BUCKET_NAME + '<br>');
-			res.write('WMS Request:<br>' + wmsrequest + '<br>');
+			res.write('WMS Request:<br>' + wmsRequest + '<br>');
 			res.write('Resulting Image Tile:<br>');
-			res.write('<img src="' + wmsrequest + '">');
+			res.write('<img src="' + wmsRequest + '">');
 			res.write('</body></html>');						
 	  		res.end();
 		} else {
 			// buffer rather than pipe it to the response
 			// these are small files, plus we can check to see if it is an image
 			var buf = new Buffer(256*256)
-			http.get(wmsrequest, function(resp) {
+			http.get(wmsRequest, function(resp) {
 				var size = 0
 				resp.on('data', function(chunk) {
 					chunk.copy(buf, size)
@@ -162,7 +161,7 @@ d.run(function() {
 				})
 				.on('end', function() {
 					// add check for image data here
-					res.writeHead(200, {'Content-Type': mimeTypes[tilename.split(".").reverse()[0]]});
+					res.writeHead(200, {'Content-Type': mimeTypes[tileName.split(".").reverse()[0]]});
 					res.write(buf.slice(0, size))
 					res.end();
 					// get reference to S3 client 
@@ -170,10 +169,10 @@ d.run(function() {
 					// upload to S3
 					s3.putObject({
 						Bucket: process.env.BUCKET_NAME, 
-						Key: tilename,
+						Key: tileName,
 						ACL: 'public-read',	
 						Body: buf.slice(0, size), 
-						ContentType: mimeTypes[tilename.split(".").reverse()[0]]}, function(err, s3put){
+						ContentType: mimeTypes[tileName.split(".").reverse()[0]]}, function(err, s3put){
 						//if (err) throw err;
 						console.log('s3put: ' + JSON.stringify(s3put, null, 2));
 					});
@@ -184,8 +183,3 @@ d.run(function() {
 	}).listen(port);
 	console.log('running on port: ' + port);
 }); //domain
-
-
-
-
-
