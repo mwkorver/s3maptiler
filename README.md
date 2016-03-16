@@ -33,4 +33,6 @@ http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
 
 ## Test it
 
-http://HOST_IP:
+
+
+http://HOST_IP/:

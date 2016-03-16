@@ -1,32 +1,29 @@
 {
-  "name": "S3maptiler",
-  "description": "Creates TMS tiles from WMS, returns image and uploads to S3.",
-  "author": "Mark Korver <mwkorver@gmail.com>",
-  "contributors": {},
-   "dependencies": { 	
-    "async": "^1.5.0",
-    "aws-sdk": "^2.1.18",
-    "fs": "^0.0.2",
-	"request": "^2.59.0",
-    "find-remove": "^0.2.10"
-  },
+  "name": "s3maptiler",
+  "version": "0.0.1",
+  "description": "Returns TMS tiles from WMS and stores in S3 for subsequent request",
   "main": "server.js",
+  "dependencies": {
+    "aws-sdk": "^2.1.18",
+    "domain": "^0.0.1"
+  },
+  "devDependencies": {},
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "version": "1.0.0",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/mwkorver/s3maptiler.git"
   },
   "keywords": [
     "map",
-    "tile",
+    "tiles",
     "wms",
     "tms"
   ],
-  "license": "",
+  "author": "Mark Korver",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mwkorver/s3maptiler/issues"
   },
