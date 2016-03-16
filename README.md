@@ -1,4 +1,4 @@
-S3 Maptiler
+s3maptiler
 ===================
 
 The purpose of this project is to support real-time tile mapping using S3 to store both tiles and source image geotifs using a auto-scaling OGC WMS service on the backend. In fact any WMS service can be used.
