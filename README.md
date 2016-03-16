@@ -5,10 +5,7 @@ This app accepts TMS requests, uses an OGC WMS to create the requested map tile,
 You can use any WMS service, but it is most performant when useed in conjunction with a WMS running in the same AWS region.
 S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if containerized on ECS.
 
-## OGC WMS
-
-Open Geospatial Consortium (OGC)
-The OGC (Open Geospatial Consortium) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
+The Open Geospatial Consortium (OGC) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
   
   > http://www.opengeospatial.org/standards/wms
 
@@ -56,13 +53,13 @@ Your IAM Role (or IAM User if not on EC2) should map to a policy that looks like
   }
 ```
 
-## Running
+## Run
 
 Test it locally, but a simple way to deploy this app in an HA fashion is to run it on Amazon Elastic Beanstalk.
 Zip the directory contents following instructions here. 
   
   > http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
 
-## Test it
+## Test
 
   http://HOST_IP/heartbeat
