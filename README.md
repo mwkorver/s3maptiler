@@ -1,7 +1,8 @@
 s3maptiler
 ===================
 
-The purpose of this project is to support real-time tile mapping using S3 to store both tiles and source image geotifs using a auto-scaling OGC WMS service on the backend. In fact any WMS service can be used.
+This app accepts TMS requests uses an OGC WMS to create the requested map tile, serves it back while saving it to S3 for subsequent requests. It is meant to run behind S3, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. If missing S3 does a redirect to this app.
+You can use any WMS service, but it is most performant when useed in conjunction with an WMS running in the same AWS region.
 S3maptiler is a node app that can be run on Amazon Beanstalk, Lambda etc.
 
 ## OGC WMS
