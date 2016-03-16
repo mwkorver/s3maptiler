@@ -24,15 +24,37 @@ See this gist for an example of S3 redirect rule.
 
 server.js uses 4 environment variables to function. You can see them in example_env.js
 WMS_SERVER points at your WMS, if you run your own WMS on AWS, it would typically point at an ELB that would front an auto-scaling group of WMS servers.
+See this Docker container for an UMN Mapserver example.
+  https://github.com/mwkorver/mapserver
+  
 BUCKET_NAME is the S3 bucket you are using to serve tiles from. This is your tile cache.
 TILE_PREFIX is a prefix to your TMS tile.
 MAP_LAYERS is layer or layers that you use in your WMS request.
 
+Remember that if you run this on EC2/Elastic Beanstalk use IAM Roles rather than IAM keys in config.js. 
+Your IAM Role (or IAM User if not on EC2) should map to a policy that looks like this.
+
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:PutObject",
+          "s3:PutObjectAcl"
+        ],
+        "Resource": ["arn:aws:s3:::yourBucketName/*"]
+      }
+    ]
+  }
+
+
 ## Running
 
 Test it locally, but a simple way to deploy this app in an HA fashion is to run it on Amazon Elastic Beanstalk.
-Zip the directory contents following instructions here.
-http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
+Zip the directory contents following instructions here. 
+  
+  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
 
 ## Test it
 
