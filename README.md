@@ -1,8 +1,8 @@
-Amazon S3 Maptiler
+S3 Maptiler
 ===================
 
-The purpose of this project is to support real-time tile mapping using S3 to store both tiles and source image data using a auto-scaling OGC WMS service on the backend.
-S3 Maptiler is a nodejs app that can be run on Amazon Beanstalk.
+The purpose of this project is to support real-time tile mapping using S3 to store both tiles and source image geotifs using a auto-scaling OGC WMS service on the backend. In fact any WMS service can be used.
+S3maptiler is a node app that can be run on Amazon Beanstalk, Lambda etc.
 
 ## OGC WMS
 
