@@ -10,7 +10,7 @@ S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if contai
 Open Geospatial Consortium (OGC)
 The OGC (Open Geospatial Consortium) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
   
-  http://www.opengeospatial.org/standards/wms
+  > http://www.opengeospatial.org/standards/wms
 
 ## Serving Tiles from S3
 
@@ -18,7 +18,7 @@ S3 maptiler is meant to run as a redirect from S3. When a request to S3 for a ti
 For redirects to work you need to have your S3 bucket configured as a website and add a redirect rule.
 See this gist for an example of S3 redirect rule.
 
-  https://gist.github.com/mwkorver/a9e7f038417e37ff4fb0
+  > https://gist.github.com/mwkorver/a9e7f038417e37ff4fb0
 
 ## Config 
 
@@ -60,7 +60,7 @@ Your IAM Role (or IAM User if not on EC2) should map to a policy that looks like
 Test it locally, but a simple way to deploy this app in an HA fashion is to run it on Amazon Elastic Beanstalk.
 Zip the directory contents following instructions here. 
   
-  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
+  > http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
 
 ## Test it
 
