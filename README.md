@@ -28,12 +28,12 @@ See this Docker container for an UMN Mapserver example.
   https://github.com/mwkorver/mapserver
 
 
-| Name        | Purpose           | Example  |
-| ------------- |:-------------:| -----:|
-| WMS_SERVER  | WMS endpoint | http://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP_SCALE/ImageServer/WMSServer?request=Getmap&service=WMS& |
-| BUCKET_NAME | is the S3 bucket you are using to serve tiles from. This is your tile cache.      | workshop-tms |
-| TILE_PREFIX | is a prefix to your TMS tile      | 1.0.0/tms-mercator-naip/ |
-| MAP_LAYERS | is layer or layers that you use in your WMS request  | ddd |
+| Name        | Purpose   | Example  |
+| ------------- |-------------|-----|
+| WMS_SERVER  | WMS endpoint | http://raster.nationalmap.gov/... |
+| BUCKET_NAME | S3 bucket you are using to serve tiles from. Your tile cache. | workshop-tms |
+| TILE_PREFIX | Prefix of TMS tile | 1.0.0/tms-mercator-naip/ |
+| MAP_LAYERS | layer names used in your WMS request  | utm11-50pct |
 
 
 Remember that if you run this on EC2/Elastic Beanstalk use IAM Roles rather than IAM keys in config.js. 
