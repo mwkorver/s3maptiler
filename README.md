@@ -3,15 +3,14 @@ s3maptiler
 
 This app accepts TMS requests, uses an OGC WMS to create the requested map tile, serves it back while saving it to S3 for subsequent requests. It is meant to run behind S3, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
 You can use any WMS service, but it is most performant when useed in conjunction with a WMS running in the same AWS region.
-S3maptiler is a node app that can be run on Amazon Beanstalk, API Gateway/Lambda etc.
+S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if containerized on ECS.
 
 ## OGC WMS
 
 Open Geospatial Consortium (OGC)
-The OGC (Open Geospatial Consortium) is an international non-profit organization committed to making quality open standards for the global geospatial community. 
-
-Read more about WMS here
-http://www.opengeospatial.org/standards/wms
+The OGC (Open Geospatial Consortium) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
+  
+  http://www.opengeospatial.org/standards/wms
 
 ## Serving Tiles from S3
 
@@ -19,7 +18,7 @@ S3 maptiler is meant to run as a redirect from S3. When a request to S3 for a ti
 For redirects to work you need to have your S3 bucket configured as a website and add a redirect rule.
 See this gist for an example of S3 redirect rule.
 
-https://gist.github.com/mwkorver/a9e7f038417e37ff4fb0
+  https://gist.github.com/mwkorver/a9e7f038417e37ff4fb0
 
 ## Config 
 
@@ -37,4 +36,4 @@ http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html
 
 ## Test it
 
-http://HOST_IP/heartbeat
+  http://HOST_IP/heartbeat
