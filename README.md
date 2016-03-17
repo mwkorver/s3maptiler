@@ -1,9 +1,13 @@
 s3maptiler
 ===================
 
-This app accepts TMS requests, uses an OGC WMS to create the requested map tile, serves it back while saving it to S3 for subsequent requests. It is meant to run behind S3, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
-You can use any WMS service, but it is most performant when useed in conjunction with a WMS running in the same AWS region.
-S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if containerized on ECS.
+This app accepts TMS requests, uses an OGC WMS to create the requested map tile, serves it back while saving it to S3 for subsequent requests. It is meant to run "behind" S3, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
+The data stored in S3 follows the Osgeo TMS specification.
+
+  > https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+
+You can use any WMS, but it is most performant when used in conjunction with a WMS running in the same AWS region.
+S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if containerized, on ECS.
 
 The Open Geospatial Consortium (OGC) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
   
