@@ -1,7 +1,7 @@
 s3maptiler
 ===================
 
-NOTE: This sample is not to be used for production. It is a prototype only. S3maptiler accepts TMS requests, parses the tilename to create a WMS request, then uses an WMS to create the requested map tile, serves it back, while saving it to S3 for subsequent requests. It is meant to run "behind" an S3 based tile cache, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
+NOTE: This is a prototype and is not to be used for production. S3maptiler accepts TMS requests, parses the tilename to create a WMS request, then uses an WMS to create the requested map tile, serves it back, while saving it to S3 for subsequent requests. It is meant to run "behind" an S3 based tile cache, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
 The data stored in S3 follows the OSGEO TMS specification.
 
   > https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
