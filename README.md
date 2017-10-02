@@ -1,12 +1,12 @@
 s3maptiler
 ===================
 
-This app accepts TMS requests, uses an OGC WMS to create the requested map tile, serves it back while saving it to S3 for subsequent requests. It is meant to run "behind" S3, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
-The data stored in S3 follows the Osgeo TMS specification.
+NOTE: This sample is not to be used for production. It is a prototype only. S3maptiler accepts TMS requests, parses the tilename to create a WMS request, then uses an WMS to create the requested map tile, serves it back, while saving it to S3 for subsequent requests. It is meant to run "behind" an S3 based tile cache, building tiles that are missing from the S3 bucket. The S3 bucket is where the initial request is made. When the map tile is missing S3 does a redirect to this app.
+The data stored in S3 follows the OSGEO TMS specification.
 
   > https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
 
-You can use any WMS, but it is most performant when used in conjunction with a WMS running in the same AWS region.
+You can use any WMS, but it is most performant when used in conjunction with a WMS running in the same AWS Region.
 S3maptiler is a node app that can be run on EC2, Amazon Beanstalk, and if containerized, on ECS.
 
 The Open Geospatial Consortium (OGC) is an international non-profit organization committed to making quality open standards for the global geospatial community. Read more about WMS here
@@ -15,7 +15,7 @@ The Open Geospatial Consortium (OGC) is an international non-profit organization
 
 ## Serving Tiles from S3
 
-S3 maptiler is meant to run as a redirect from S3. When a request to S3 for a tile 'misses' S3 redirects to S3maptiler. S3maptiler creates a tile, serves the response, and also copies the tile to S3 for the subsequent requests. You can manage how long the tiles persist on S3 by using S3 lifecycle policy.
+S3maptiler is meant to run as a redirect from S3. When a request to S3 for a tile 'misses', S3 redirects to S3maptiler. S3maptiler creates a tile, serves the response, and also copies the tile to S3 for any subsequent requests. You can manage how long the tiles persist on S3 by using S3 lifecycle policy.
 For redirects to work you need to have your S3 bucket configured as a website and add a redirect rule.
 See this gist for an example of S3 redirect rule.
 
